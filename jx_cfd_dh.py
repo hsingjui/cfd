@@ -40,9 +40,7 @@ def get_cookie():
     cookies = get_envs("CFD_COOKIE")
     for ck in cookies:
         if ck.get('status') == 0:
-            print(ck)
-            ck.value += 'cid=1'
-            print(ck)
+            ck['value'] += 'cid=1'
             ck_list.append(ck)
     if len(ck_list) >= 1:
         cookie = ck_list[0]
