@@ -41,9 +41,10 @@ def get_cookie():
     print(cookies)
     for ck in cookies:
         if ck.get('status') == 0:
+            ck.value += 'cid=1'
             ck_list.append(ck)
     if len(ck_list) >= 1:
-        cookie = ck_list[0] + 'cid=1'
+        cookie = ck_list[0]
         re_list = pattern_pin.search(cookie.get('value'))
         if re_list is not None:
             pin = re_list.group(1)
