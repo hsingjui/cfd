@@ -16,7 +16,7 @@ cfd_start_time = -0.15
 cfd_offset_time = 0.01
 
 # 基础配置勿动
-cfd_url = "https://m.jingxi.com/jxbfd/user/ExchangePrize?strZone=jxbfd&bizCode=jxbfd&source=jxbfd&dwEnv=7&_cfd_t=1648778416388&ptag=7155.9.47&dwType=3&dwLvl=2&ddwPaperMoney=100000&strPoolName=jxcfd2_exchange_hb_202204&strPgtimestamp=1648778416345&strPhoneID=1ef0eafd7b25011a040a37ab925a5586ebfe3f35&strPgUUNum=1674e9a767125864a580ba003b8e655b&_stk=_cfd_t%2CbizCode%2CddwPaperMoney%2CdwEnv%2CdwLvl%2CdwType%2Cptag%2Csource%2CstrPgUUNum%2CstrPgtimestamp%2CstrPhoneID%2CstrPoolName%2CstrZone&_ste=1&h5st=20220401100016388%3B9785369927142102%3B92a36%3Btk02w5c951a1218nwt7hCp33UXI2Fjh60u3JfB%2BJ8MEWiMV%2Fibq4jLJPa3oZjNWJAHB1M35JEoTGURFBUSdW9vmWI3Y4%3B62cd48fa4161a161d28b0491ea99225665b121721a11208c5ffe19b0cf1cf4c7%3B3.0%3B1648778416388&_=1648778416389&sceneval=2&g_login_type=1&callback=jsonpCBKX&g_ty=ls"
+cfd_url = "https://m.jingxi.com/jxbfd/user/ExchangePrize?strZone=jxbfd&bizCode=jxbfd&source=jxbfd&strDeviceId=8e3bcba7547022129527b5fd2c4ea160a1402644&dwEnv=7&_cfd_t=1655711507270&ptag=7155.9.47&dwType=3&dwLvl=15&ddwPaperMoney=100000&strPoolName=jxcfd2_exchange_hb_202205&strPgtimestamp=1655711507173&strPhoneID=8e3bcba7547022129527b5fd2c4ea160a1402644&strPgUUNum=404e59439a33a4c2105d157c77068a57&_stk=_cfd_t%2C_imbfd%2CbizCode%2CddwPaperMoney%2CdwEnv%2CdwLvl%2CdwType%2Cptag%2Csource%2CstrDeviceId%2CstrPgUUNum%2CstrPgtimestamp%2CstrPhoneID%2CstrPoolName%2CstrZone&_ste=1&h5st=20220620155147274%3B9019913149799256%3B92a36%3Btk02wb4241be218nvyZL35Jqylrour1jSapCuJ%2FFhOU%2BmIHR%2FarAa%2Fb5PFBGjyj6MAobcHM18EgiQpeBhcd0Gp4fKH2r%3Bafdc7232d54c0b3d6101ffe53d1460155188008ff99dd87315a4df47165c0c34%3B3.1%3B1655711507274%3B7414c4e56278580a133b60b72a30beb2764d2e61c66a5620e8e838e06644d1bf9b1572d520e7159e5bc4edaaa5eb8559c6d3a38ad8b00f6cd7df357a4103005f6b932004bb277c0ddef5a245d2e068d7b47f99694b0981105f4d06bc81cc93f7&_=1655711507282&sceneval=2&g_login_type=1&callback=jsonpCBKK&g_ty=ls&appCode=msd1188198"
 pattern_pin = re.compile(r'pt_pin=([\w\W]*?);')
 pattern_data = re.compile(r'\(([\w\W]*?)\)')
 
@@ -38,11 +38,12 @@ def get_cookie():
     pin = "null"
     cookie = None
     cookies = get_envs("CFD_COOKIE")
+    print(cookies)
     for ck in cookies:
         if ck.get('status') == 0:
             ck_list.append(ck)
     if len(ck_list) >= 1:
-        cookie = ck_list[0]
+        cookie = ck_list[0] + 'cid=1'
         re_list = pattern_pin.search(cookie.get('value'))
         if re_list is not None:
             pin = re_list.group(1)
