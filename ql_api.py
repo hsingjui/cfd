@@ -1,12 +1,14 @@
 import json
 import time
-
+import os
 import requests
 
 ql_auth_path = '/ql/config/auth.json'
-# ql_auth_path = r'D:\Docker\ql\config\auth.json'
-ql_url = 'http://localhost:5600'
+if not os.path.exists(ql_auth_path):
+    print('高版本青龙，使用路径/ql/data/config/auth.json')
+    ql_auth_path = '/ql/data/config/auth.json'
 
+ql_url = 'http://localhost:5600'
 
 def __get_token() -> str or None:
     with open(ql_auth_path, 'r', encoding='utf-8') as f:
