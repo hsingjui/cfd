@@ -21,6 +21,7 @@ cfd_url = "https://m.jingxi.com/jxbfd/user/ExchangePrize?strZone=jxbfd&bizCode=j
 pattern_pin = re.compile(r'pt_pin=([\w\W]*?);')
 pattern_data = re.compile(r'\(([\w\W]*?)\)')
 
+title = '财富岛抢购通知'
 
 # 获取下个整点和时间戳
 def get_date() -> str and int:
@@ -93,7 +94,8 @@ def cfd_qq(def_start_time):
         msg = "可能抢到了"
         put_envs(u_cookie.get('_id'), u_cookie.get('name'), u_cookie.get('value'), msg)
         disable_env(u_cookie.get('_id'))
-        send('财富岛抢购通知', '用户[',u_pin,']可能抢到了')
+        content = '用户[' + u_pin + ']可能抢到了'
+        send(title, content)
     elif data['iRet'] == 2016:
         # 需要减
         start_time = float(u_start_time) - float(cfd_offset_time)
@@ -109,12 +111,14 @@ def cfd_qq(def_start_time):
         # 财富值不够
         put_envs(u_cookie.get('_id'), u_cookie.get('name'), u_cookie.get('value'), msg)
         disable_env(u_cookie.get('_id'))
-        send('财富岛抢购通知', '用户[',u_pin,']财富值不够')
+        content = '用户[' + u_pin + ']财富值不够'
+        send(title, content)
     elif data['iRet'] == 9999:
         # 账号过期
         put_envs(u_cookie.get('_id'), u_cookie.get('name'), u_cookie.get('value'), msg)
         disable_env(u_cookie.get('_id'))
-        send('财富岛抢购通知', '用户[',u_pin,']账号过期')
+        content = '用户[' + u_pin + ']账号过期'
+        send(title, content)
     print("实际发送[{}]\n耗时[{:.3f}]\n用户[{}]\n结果[{}]".format(d1, (t2 - t1), u_pin, msg))
 
 
