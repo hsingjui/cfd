@@ -42,7 +42,8 @@ def get_cookie():
     cookies = get_envs("CFD_COOKIE")
     for ck in cookies:
         if ck.get('status') == 0:
-            ck['value'] += 'cid=1'
+            if ck['value'].find('cid=1') == -1:
+                ck['value'] += 'cid=1;'
             ck_list.append(ck)
     if len(ck_list) >= 1:
         cookie = ck_list[0]
@@ -114,7 +115,7 @@ def cfd_qq(def_start_time):
         put_envs(u_cookie.get('_id'), u_cookie.get('name'), u_cookie.get('value'), msg)
         disable_env(u_cookie.get('_id'))
     print("实际发送[{}]\n耗时[{:.3f}]\n用户[{}]\n结果[{}]".format(d1, (t2 - t1), u_pin, msg))
-    content = content = '用户[' + u_pin + ']' + msg
+    content = content = '用户[' + u_pin + ']\n' + msg
     send(title, content)
 
 
